@@ -8,13 +8,13 @@ import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
 
 @RunWith(Parameterized.class)
-public class LionHasManeTest {
+public class LionHasManePositiveTest {
 
     private final String sex;
     private final boolean hasMane;
     private Feline feline;
 
-    public LionHasManeTest(String sex, boolean hasMane) {
+    public LionHasManePositiveTest(String sex, boolean hasMane) {
         this.sex = sex;
         this.hasMane = hasMane;
     }
@@ -23,8 +23,7 @@ public class LionHasManeTest {
     public static Object[][] data() {
         return new Object[][] {
                 {"Самец", true},
-                {"Самка", false},
-                {"Не определился", false}
+                {"Самка", false}
         };
     }
 
@@ -34,12 +33,8 @@ public class LionHasManeTest {
     }
 
     @Test
-    public void checkSexTest() throws Exception {
-        try {
-            Lion lion = new Lion(sex, feline);
+    public void hasManePositiveTest() throws NoSuchSexOfAnimalException{
+        Lion lion = new Lion(sex, feline);
             Assert.assertEquals("Наличие гривы у льва не соответствует ожидаемому результату", hasMane, lion.doesHaveMane());
-        } catch (NoSuchSexOfAnimalException expectedException) {
-            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", expectedException.getMessage());
         }
     }
-}

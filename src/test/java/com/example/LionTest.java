@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,8 +16,8 @@ public class LionTest {
     @Test
     public void getKittensInvokeFelineGetKittens() throws Exception {
         Lion lion = new Lion("Самка", feline);
-        lion.getKittens();
-        Mockito.verify(feline, Mockito.times(1)).getKittens();
+        Mockito.when(feline.getKittens()).thenReturn(5);
+        Assert.assertEquals(5, lion.getKittens());
     }
 
     @Test
